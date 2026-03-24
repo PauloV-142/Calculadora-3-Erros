@@ -7,8 +7,8 @@ const botoes = {
         ponto: undefined
     }
 };
-for (let i = 0; i <= 9; i++) {
 
+for (let i = 0; i <= 9; i++) {
     botoes.numeros.push(document.getElementById(`${i}`));
 };
 
@@ -16,8 +16,15 @@ for (let i = 0; i <= 9; i++) {
     botoes.opr[v] = document.getElementsByClassName(v)
 );
 
+const field = document.getElementById("field");
 
-// Usar JQuery?
 
+// Calcular
+botoes.opr.onclick = function calcular(conta) {
+    // Math.js
+}
 
-console.log(botoes);
+// Input
+botoes.numeros.forEach((btn) => {
+    btn.onclick = () => { field.value += btn.id}
+})

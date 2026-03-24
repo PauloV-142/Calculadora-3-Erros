@@ -4,11 +4,10 @@ Projeto para qualidade e testes de software. HTML, JS e CSS simples. Haverão tr
 
 ## TODO:
 - [x] Adicionar botão de igual (Finalizar layout)
+    - Add botão C (limpar)
 - [ ] Fazer os botões funcionarem (E o teclado)
 - [ ] MathJS para fazer os cálculos (Evaluating)
 - Inserir os Três erros:
     - [ ] 1...
     - [ ] 2...
-    - [ ] 3...
-
-
+    - [ ] 3... 

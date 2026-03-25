@@ -1,30 +1,48 @@
-const botoes = {
-    numeros: [],
-    opr: {
-        soma: undefined,
-        sub: undefined,
-        igual: undefined,
-        ponto: undefined
-    }
-};
+const btnNumeros = [];
+const btnPonto = document.querySelector(".ponto")
+const btnSoma = document.querySelector(".soma");
+const btnSub = document.querySelector(".sub");
+const btnIgual = document.querySelector(".igual");
 
+/* Pegar Botões Numéricos */
 for (let i = 0; i <= 9; i++) {
-    botoes.numeros.push(document.getElementById(`${i}`));
+    btnNumeros.push(document.getElementById(i));
 };
-
-["soma", "sub", "ponto", "igual"].forEach((v) =>
-    botoes.opr[v] = document.getElementsByClassName(v)
-);
 
 const field = document.getElementById("field");
 
 
-// Calcular
-botoes.opr.onclick = function calcular(conta) {
-    // Math.js
+/* Calcular */
+btnIgual.onclick = function calcular() {
+    // We can edit this function and add some errors here >:D
+    // JK (sort of)
+
+    // Source - https://stackoverflow.com/a/2276173
+    // Posted by kennebec, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-03-24, License - CC BY-SA 4.0
+
+    function addbits(s) {
+      var total = 0,
+          s = s.match(/[+\-]*(\.\d+|\d+(\.\d+)?)/g) || [];
+
+      while (s.length) {
+        total += parseFloat(s.shift());
+      }
+      return total;
+    } // Idk how it works
+
+    field.value = addbits(field.value);
 }
 
-// Input
-botoes.numeros.forEach((btn) => {
-    btn.onclick = () => { field.value += btn.id}
-})
+function fieldInsert(str) {
+    field.value += str;
+    // Aqui estará a lógica das ideias 2. e 3.
+}
+
+/* Input */
+for (let element of btnNumeros) {
+    element.onclick = () => fieldInsert(element.id);
+}
+btnPonto.onclick = () => fieldInsert(".");
+btnSoma.onclick = () => fieldInsert(" + ");
+btnSub.onclick = () => fieldInsert(" - ");

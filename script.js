@@ -25,7 +25,7 @@ btnIgual.onclick = calcular;
 
 btnLimpar.onclick = clear;
 
-/* Input */
+/* Operators */
 btnPonto.onclick = () => fieldInsert(".");
 btnSoma.onclick = () => fieldInsert("+");
 btnSub.onclick = () => fieldInsert("-");
@@ -67,7 +67,7 @@ function clear() {
 function formatOperator(str, char) {
     return getPreviousStringValue(str, char) + ` ${char} `;
 }
-/* SUBTRAÇÂO NÂO FUNCIONA TWT */
+
 function calcular() {
     // We can edit this function and add some errors here >:D
     // JK (sort of)
@@ -76,13 +76,15 @@ function calcular() {
     // Posted by kennebec, modified by community. See post 'Timeline' for change history
     // Retrieved 2026-03-24, License - CC BY-SA 4.0]
     function addbits(s) {
-         s.replace(" ", "");
-         console.log(s)
-      var total = 0,
-          s = s.match(/[+\-]*(\.\d+|\d+(\.\d+)?)/g) || [];
-      while (s.length) {
-        total += parseFloat(s.shift());
-      }
+        while (s.includes(" ")) {
+            s = s.replace(" ", "");
+        }
+        console.log(s)
+        var total = 0,
+        s = s.match(/[+\-]*(\.\d+|\d+(\.\d+)?)/g) || [];
+        while (s.length) {
+            total += parseFloat(s.shift());
+        }
       return total;
     } // Idk how it works
 

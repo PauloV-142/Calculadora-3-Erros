@@ -55,28 +55,32 @@
         display: grid;
         gap: 0.2em;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        .c {
+            grid-row-start:1;
+            grid-column-start: 4;
+        }
         .zero {
             grid-column-start: 1;
             grid-column-end: 3;
         }
-        .soma {
+        .sub {
             grid-row-start: 2;
-            grid-row-end: 3;
+            grid-row-end: 3; 
             grid-column-start: 4;
             grid-column-end: 5;
         }
-        .sub {
-            grid-row-start: 1;
-            grid-row-end: 2; 
+        .soma {
+            grid-row-start: 3;
+            grid-row-end: 5;
             grid-column-start: 4;
             grid-column-end: 5;
         }
         .igual {
-            grid-column-start: 4;
+            grid-column-start: 1;
             grid-column-end: 5;
-            grid-row-start: 3;
-            grid-row-end: 5;
+            grid-row-start: 5;
+            grid-row-end: 6;
         }
         .opr {
             background-color: rgb(25, 197, 140);

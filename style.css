@@ -22,13 +22,13 @@
         text-align: center;
         border: none;
         border-radius: .3em;
-
+        transition: .2s ease all;
         
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,  Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-weight: 700;
 
         &:hover{
-            box-shadow: 0px 0px 10px 5px #0dcaf0;
+            box-shadow: 0px 0px 10px 1px #0dcaf0;
         }
     }
 
@@ -39,11 +39,13 @@
         border-radius: 1rem;
     }
 
-    input {
+    #field {
         width: 100%;
+        height: 4em;
         border-radius: .3em;
+        padding: .4em;
         text-align: right;
-        background-color: black;
+        background-color: rgba(0, 225, 255, 0.521);
         color: white;
         
         /* font-size: 2em; */ /* Por algum motivo faz a calculadora ficar mais larga. Talvez devo adicionar uma margem para o texto */
@@ -84,5 +86,8 @@
         }
         .opr {
             background-color: rgb(25, 197, 140);
+            &:hover{
+            box-shadow: 0px 0px 10px 1px rgb(25, 197, 140);
+        }
         }
     }

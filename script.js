@@ -4,34 +4,60 @@ const btnSub = document.querySelector(".sub");
 const btnIgual = document.querySelector(".igual");
 const btnLimpar = document.querySelector(".c");
 
-const field = document.getElementById("field");
+const inputField = document.getElementById("field");
+let field = {};
 
-/* Pegar Botões Numéricos */
+
 const btnNumeros = [];
 for (let i = 0; i <= 9; i++) {
     btnNumeros.push(document.getElementById(i));
-    btnNumeros[i].onclick = () => fieldInsert(i);
+    btnNumeros[i].onclick = () => field.insert(i);
 };
+document.body.onkeydown = handleKeyboardInput;
 
-
-// for (let element of btnNumeros) {
-//     element.onclick = () => fieldInsert(element.id);
-// }
-
-let previousValue = "";
-let delta = "";
 /* Calcular */
-btnIgual.onclick = calcular;
-
-btnLimpar.onclick = clear;
+btnIgual.onclick = field.calcular;
+btnLimpar.onclick = field.clear;
 
 /* Operators */
-btnPonto.onclick = () => fieldInsert(".");
-btnSoma.onclick = () => fieldInsert("+");
-btnSub.onclick = () => fieldInsert("-");
+btnPonto.onclick = () => field.insert(".");
+btnSoma.onclick = () => field.insert("+");
+btnSub.onclick = () => field.insert("-");
 
-// To also handle physical keyboard inputs
-field.oninput = handleKeyboardInput;
+field = {
+    set value(str) {
+        inputField.textContent = str;
+        // Auto Evaluator here
+    },
+    get value() {
+        return inputField.textContent;
+    },
+
+    clear() {
+        field.value = "";
+        console.log("clear")
+    },
+    insert(str) {
+        if (isOperator(str)) {
+            str = ` ${str} `;
+        }
+        field.value += str;
+    },
+    calcular() {
+        field.value = calcular(field.value);
+    },
+    backspace() {
+        if (! isOperator(field.value.at(-2))) {
+            field.value = field.value.slice(0, -1)
+        } else {
+            field.value = field.value.slice(0, -3);
+        }
+
+    }
+}
+
+
+
 
 /* MyLib */
 function getPreviousStringValue(str, insertedStr) {
@@ -42,7 +68,7 @@ function getPreviousStringValue(str, insertedStr) {
 }
 
 function isCharAllowed(char) {
-    if (Number(char)) { // Ideia de erro. Number(char) Não está reconhecendo o zero (0 -> false), deixar assim?
+    if (char == Number(char)) {
         return true;
     } else if (isOperator(char) || char == "."){
         return true;
@@ -54,55 +80,47 @@ function isCharAllowed(char) {
 }
 
 function isOperator(char) {
-    if (["+", "-"].includes(char)) {
+    if ((char == "+" || char == "-")) {
         return true;
     }
-    return false;
-}
-
-function clear() {
-    field.value = "";
+    return false ;
 }
 
 function formatOperator(str, char) {
     return getPreviousStringValue(str, char) + ` ${char} `;
 }
 
-function calcular() {
-    // We can edit this function and add some errors here >:D
-    // JK (sort of)
-
+function calcular(s) {
     // Source - https://stackoverflow.com/a/2276173
-    // Posted by kennebec, modified by community. See post 'Timeline' for change history
-    // Retrieved 2026-03-24, License - CC BY-SA 4.0]
-    function addbits(s) {
-        while (s.includes(" ")) {
-            s = s.replace(" ", "");
-        }
-        console.log(s)
-        var total = 0,
-        s = s.match(/[+\-]*(\.\d+|\d+(\.\d+)?)/g) || [];
-        while (s.length) {
-            total += parseFloat(s.shift());
-        }
-      return total;
-    } // Idk how it works
-
-    field.value = addbits(field.value);
-}
-
-function fieldInsert(str) {
-    if (isOperator(str)) {
-        str = ` ${str} `;
+    // function addbits(s) {
+    console.log("calc  "+ s)
+    while (s.includes(" ")) {
+        s = s.replace(" ", "");
     }
-    field.value += str;
+
+    console.log(s)
+    var total = 0,
+    s = s.match(/[+\-]*(\.\d+|\d+(\.\d+)?)/g) || [];
+    
+    while (s.length) {
+        total += parseFloat(s.shift());
+    }
+    return total;
 }
 
 function handleKeyboardInput(keyboardEvent) {
-    let keyPressed = keyboardEvent.data;
-    if (! isCharAllowed(keyPressed)) {
-        field.value = getPreviousStringValue(field.value, keyPressed);
-    } else if (isOperator(keyPressed)) {
-        field.value = formatOperator(field.value, keyPressed);
+    switch (keyboardEvent.key) {
+        case "Backspace":
+            field.backspace();
+            break;
+        case "Enter":
+            field.calcular();
+            break;
+        case ",":
+            field.insert(".");
+        default:
+            if (isCharAllowed(keyboardEvent.key))
+                field.insert(keyboardEvent.key);
     }
+    // highlightButton(field.keyPressed);
 };

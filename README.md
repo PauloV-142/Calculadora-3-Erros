@@ -4,11 +4,11 @@ Projeto para qualidade e testes de software. HTML, JS e CSS simples. Haverão tr
 
 ## TODO:
 - [x] Adicionar botão de igual (Finalizar layout)
-    - Add botão C (limpar)
+    - [x] Add botão C (limpar)
 - [x] Fazer os botões funcionarem (E o teclado)
 - [x] Adição e Subtração Simples
 - Inserir os Três erros:
-    - [x] 1. Na função `isCharAllowed`, em sua verificação numérica, `Number(char)`, o zero não é aceito, pois mesmo sendo um número, seu valor é igual ao booleano `false`. (encontrei sem querer)
+    - [] 1. Na função `isCharAllowed`, em sua verificação numérica, `Number(char)`, o zero não é aceito, pois mesmo sendo um número, seu valor é igual ao booleano `false`. (encontrei sem querer)
     - [ ] 2...
     - [ ] 3... 
 
